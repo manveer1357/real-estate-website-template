@@ -20,12 +20,6 @@ type Props = {
 //   }
 // }
 
-export default function PropPage({
-  params,
-  children,
-}: {
-  params: Promise<{ slug: string }>;
-  children: React.ReactNode;
-}) {
+export default function PropPage({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
