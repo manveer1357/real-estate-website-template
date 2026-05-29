@@ -53,13 +53,13 @@ const Page = () => {
           <Separator />
           <div className="flex items-stretch justify-between w-full h-full">
             <div className="flex flex-col items-center justify-between gap-4 max-w-1/2 md:w-full">
-              <p className=" tracking-widest font-semibold text-xs text-center">
+              <p className="w-full tracking-widest font-semibold text-xs text-center">
                 GLOBAL ADVISOR SPOTLIGHT
               </p>
               <h1 className="font-bold text-4xl text-primary">$2B+</h1>
             </div>
-            <div className="flex flex-col items-center justify-between gap-4">
-              <p className="w-full tracking-widest font-semibold text-xs">
+            <div className="flex flex-col items-center justify-between gap-4 max-w-1/2 md:w-full">
+              <p className="w-full tracking-widest font-semibold text-xs text-center">
                 MARKETS COVERED
               </p>
               <h1 className="font-bold text-4xl text-primary">14</h1>
