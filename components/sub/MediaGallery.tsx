@@ -68,14 +68,17 @@ export default function PropertyBrowser() {
   );
 
   return (
-    <div className="w-full h-auto mx-auto select-none">
+    <div className="w-full h-full mx-auto select-none">
       {/* 2-Column Layout: Main Content (Left) & Thumbnails (Right) */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 h-auto md:h-[85vh]">
         {/* ================= LEFT: MAIN VIEWPORT ================= */}
-        <div className="relative md:col-span-3 rounded-2xl overflow-hidden group h-87.5 md:h-full bg-neutral-900 aspect-video">
+        <div className="relative md:col-span-3 rounded-2xl overflow-hidden group h-full md:h-full bg-neutral-900 aspect-video">
           <Carousel
             setApi={setMainApi}
             className="w-full h-full [&>div]:h-full"
+            opts={{
+              loop: true,
+            }}
           >
             <CarouselContent className="h-full ml-0">
               {images.map((img) => (
@@ -97,48 +100,48 @@ export default function PropertyBrowser() {
           </Carousel>
 
           {/* Custom Forward / Backward Arrow Navigation */}
-          <div className="absolute inset-y-0 left-4 flex items-center z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-y-0 left-2 md:left-4 flex items-center z-10 opacity-0 group-hover:opacity-100 transition-opacity">
             <Button
               size="icon"
               variant="secondary"
-              className="rounded-full h-9 w-9 bg-white/80 hover:bg-white backdrop-blur-sm"
+              className="rounded-full w-9 aspect-square bg-white/80 hover:bg-white backdrop-blur-sm"
               onClick={() => mainApi?.scrollPrev()}
               disabled={!mainApi?.canScrollPrev()}
             >
-              <ChevronLeft className="h-5 h-5 text-neutral-800" />
+              <ChevronLeft className="h-5 text-neutral-800" />
             </Button>
           </div>
-          <div className="absolute inset-y-0 right-4 flex items-center z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-y-0 right-2 md:right-4 flex items-center z-10 opacity-0 group-hover:opacity-100 transition-opacity">
             <Button
               size="icon"
               variant="secondary"
-              className="rounded-full h-9 w-9 bg-white/80 hover:bg-white backdrop-blur-sm"
+              className="rounded-full aspect-square w-9 bg-white/80 hover:bg-white backdrop-blur-sm"
               onClick={() => mainApi?.scrollNext()}
               disabled={!mainApi?.canScrollNext()}
             >
-              <ChevronRight className="h-5 h-5 text-neutral-800" />
+              <ChevronRight className="h-5 text-neutral-800" />
             </Button>
           </div>
         </div>
 
         {/* ================= RIGHT: THUMBNAILS PANEL ================= */}
         {/* On desktop, it's a vertical list. On mobile, it falls back to a horizontal scrollable row */}
-        <div className="md:col-span-1 h-[90px] md:h-full">
+        <div className="md:col-span-1 h-full">
           <Carousel
             setApi={setThumbApi}
             opts={{ containScroll: "keepSnaps", dragFree: true }}
             orientation="horizontal"
             className="w-full h-full md:hidden" // Mobile Carousel Configuration
           >
-            <CarouselContent className="flex gap-2 ml-0">
+            <CarouselContent className="flex gap-2 ml-0 p-2">
               {images.map((img, index) => (
-                <div
+                <CarouselItem
                   key={img.id}
                   onClick={() => onThumbClick(index)}
                   className={cn(
-                    "relative w-full aspect-video rounded-xl overflow-hidden cursor-pointer shrink-0 transition-all border-2",
+                    "relative basis-1/3 aspect-video rounded-xl overflow-hidden cursor-pointer shrink-0 transition-all border-2",
                     selectedIndex === index
-                      ? "border-white ring-2 ring-neutral-900"
+                      ? "border-white ring-2 ring-primary"
                       : "border-transparent opacity-60",
                   )}
                 >
@@ -149,7 +152,7 @@ export default function PropertyBrowser() {
                     className="object-cover"
                     sizes="(max-width: 1920px) 100vw, 75vw"
                   />
-                </div>
+                </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
@@ -165,7 +168,7 @@ export default function PropertyBrowser() {
                   key={img.id}
                   onClick={() => onThumbClick(index)}
                   className={cn(
-                    "relative flex-1 rounded-2xl overflow-hidden cursor-pointer transition-all border-2 min-h-[120px]",
+                    "relative flex-1 rounded-2xl overflow-hidden cursor-pointer transition-all border-2 min-h-30",
                     selectedIndex === index
                       ? "border-neutral-900 scale-[0.98]"
                       : "border-transparent opacity-70 hover:opacity-100",

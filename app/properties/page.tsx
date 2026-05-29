@@ -1,5 +1,10 @@
 "use client";
-import { ScrollToTop } from "@/components/ScrollButtons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,12 +15,37 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
-import { Bath, BedDouble, MapPin, Search, TriangleRight } from "lucide-react";
+import {
+  Bath,
+  BedDouble,
+  Funnel,
+  MapPin,
+  Search,
+  TriangleRight,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 const Page = () => {
   const router = useRouter();
@@ -27,7 +57,46 @@ const Page = () => {
           Explore our curated collection of architectural masterpieces, from
           sun-drenched private islands to historic European chateaus.
         </p>
-        <div className="h-fit w-full p-4">
+        <div className="w-full h-full md:hidden">
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button variant={"secondary"} className="w-full">
+                <Funnel />
+                Filter
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Filters</DrawerTitle>
+                <DrawerDescription>
+                  This action cannot be undone.
+                </DrawerDescription>
+              </DrawerHeader>
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue="item-0"
+                className="px-4"
+              >
+                {[...Array(5)].map((i, _) => (
+                  <AccordionItem key={_} value={`item-${_}`}>
+                    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                    <AccordionContent>
+                      Yes. It adheres to the WAI-ARIA design pattern.
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+              <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </div>
+        <div className="hidden md:block h-fit w-full p-4">
           <Field orientation={"horizontal"} className="items-end">
             <Field>
               <FieldLabel htmlFor="location">Location</FieldLabel>
@@ -54,7 +123,7 @@ const Page = () => {
           </Field>
         </div>
       </section>
-      <section className="columns-4 gap-2 space-y-2 w-full h-full">
+      <section className="hidden md:block columns-4 gap-2 space-y-2 w-full h-full">
         {[...Array(20)].map((i, _) => (
           <Card
             key={_}
@@ -102,6 +171,48 @@ const Page = () => {
             </CardFooter>
           </Card>
         ))}
+      </section>
+      <section className="block md:hidden">
+        <ItemGroup>
+          {[...Array(10)].map((i, _) => (
+            <Item
+              key={_}
+              className="hover:bg-accent"
+              onClick={() => router.push(`/properties/${_}`)}
+            >
+              <ItemMedia variant={"image_lg"}>
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi-PikkxIAwFHWl8TPp3gmk2PVysb7Sd7m6YpipKwY-cCazPba4Zw2G-Hs-f23lmvyqafvkHEvhg-s19VtOROb16gcAJEm-_0xMRJhm1nJoXJonr7hbU0uJmBBQqHLzrrMfK3opqpyjFUGORVwKVtVrEHY9kmEBhiNaqPhNdnpFOw0cYqMZ1V7iZl81Sdx3iN3dZjKtlxjnEWU2e7SEymUoqCWKdeuaMppc40xMTxkRQ-NdQ_omUOHb_ipIKJgVTi45uU9n43Bfdk"
+                  alt=""
+                  className="object-cover w-full h-fit"
+                />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle>
+                  <h1 className="font-semibold text-lg">The Zenith House</h1>
+                </ItemTitle>
+                <ItemDescription>
+                  <span className="flex items-center justify-items-start gap-1 w-full">
+                    <MapPin size={16} />
+                    Bel Air, Los Angeles, CA
+                  </span>
+                </ItemDescription>
+              </ItemContent>
+              <Separator />
+              <ItemFooter className="gap-4 justify-between">
+                <span className="flex items-center text-xs justify-items-start gap-2">
+                  <BedDouble size={16} /> 6 Beds
+                </span>
+                <span className="flex items-center text-xs justify-items-start gap-2">
+                  <Bath size={16} /> 6 Baths
+                </span>
+                <span className="flex items-center text-xs justify-items-start gap-2">
+                  <TriangleRight size={16} /> 12,000 sq.ft
+                </span>
+              </ItemFooter>
+            </Item>
+          ))}
+        </ItemGroup>
       </section>
     </main>
   );

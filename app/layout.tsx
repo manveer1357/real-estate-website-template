@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollButtons";
+import Header from "@/components/hf/Header";
+import Footer from "@/components/hf/Footer";
+import { ScrollToTop } from "@/components/sub/ScrollButtons";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -33,9 +36,16 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Header />
-        <ScrollToTop />
-        {children}
+        <TooltipProvider>
+          <SidebarProvider defaultOpen={false}>
+            <AppSidebar />
+            <SidebarInset>
+              <Header />
+              <ScrollToTop />
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
+        </TooltipProvider>
         <Footer />
       </body>
     </html>

@@ -1,13 +1,13 @@
 "use client";
 import { ArrowUp, ChevronDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-export const ScrollToSection = () => {
+export const ScrollToSection = ({ ...props }: React.ComponentProps<"span">) => {
   return (
     <>
       <span
-        className="absolute bottom-1/20 left-1/2 z-3 cursor-pointer"
+        className={`absolute bottom-1/20 left-1/2 z-3 cursor-pointer ${props.className}`}
         onClick={() => window.scrollBy({ top: 555, behavior: "smooth" })}
       >
         <ChevronDown />
@@ -16,7 +16,10 @@ export const ScrollToSection = () => {
   );
 };
 
-export const ScrollToTop = () => {
+export const ScrollToTop = ({
+  className,
+  ...props
+}: React.ComponentProps<"button">) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export const ScrollToTop = () => {
       variant={"secondary"}
       size={"icon-lg"}
       className={`fixed ${isVisible ? "opacity-100" : "opacity-0"} 
-        transition-all duration-300 ease-in-out z-500 bottom-5 right-10`}
+        transition-all duration-300 ease-in-out z-500 bottom-5 right-10 ${className} `}
       onClick={scrollToTop}
     >
       <ArrowUp />

@@ -1,4 +1,4 @@
-import PropertyBrowser from "@/components/MediaGallery";
+import PropertyBrowser from "@/components/sub/MediaGallery";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -33,19 +33,21 @@ const Page = () => {
       <section>
         <PropertyBrowser />
       </section>
-      <section className="flex items-start justify-between gap-4 relative">
+      <section className="flex flex-col md:flex-row items-start justify-between gap-4 relative">
         <section className="space-y-4 md:w-3/4">
-          <div className="flex items-start justify-between">
-            <div>
+          <div className="space-y-4">
+            <div className="flex items-start justify-between gap-4">
               <h1 className="font-semibold text-2xl">The Zenith House</h1>
-              <p className="flex items-center text-sm justify-items-start gap-2 w-full">
-                <MapPin size={16} />
-                Bel Air, Los Angeles, CA
+              <p className="text-primary font-semibold text-xl md:text-3xl">
+                $18,750,000
               </p>
             </div>
-            <p className="text-primary font-semibold text-3xl">$18,750,000</p>
+            <p className="flex items-center text-sm justify-items-start gap-2 w-full">
+              <MapPin size={16} />
+              Bel Air, Los Angeles, CA
+            </p>
           </div>
-          <div className="flex items-center justify-evenly gap-4 p-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 items-center justify-evenly gap-4 p-4">
             <Card className="w-full rounded">
               <CardHeader className="flex items-center justify-center text-primary">
                 <BedDouble />
@@ -141,14 +143,14 @@ const Page = () => {
             </ItemGroup>
           </div>
         </section>
-        <Card className="w-1/4 sticky top-20">
+        <Card className=" w-full md:w-1/4 block md:sticky top-20">
           <CardHeader>
             <CardTitle className="font-bold text-lg">
               Book a Private Tour
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <FieldGroup>
+            <FieldGroup className="pt-4">
               <Field>
                 <FieldLabel>Full Name</FieldLabel>
                 <Input type={"text"} placeholder="John Doe" />

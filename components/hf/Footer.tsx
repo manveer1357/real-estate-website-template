@@ -1,15 +1,15 @@
 import React from "react";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
-import { Field } from "./ui/field";
-import { Input } from "./ui/input";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { Field } from "../ui/field";
+import { Input } from "../ui/input";
 import { ArrowRight } from "lucide-react";
 
 const Footer = () => {
   return (
     <>
-      <footer className="md:py-24 md:px-8 p-2 flex items-start justify-between gap-4 bg-white">
-        <div className="w-3/10 space-y-4">
+      <footer className="py-24 px-8 p-2 flex flex-col md:flex-row md:items-start justify-between gap-8 bg-white">
+        <div className="md:w-3/10 w-full space-y-4">
           <h1 className="font-bold text-3xl">AESTHETIQ</h1>
           <p className="text-sm">
             Redefining luxury real estate through architectural excellence and
@@ -33,7 +33,7 @@ const Footer = () => {
             <Button variant={"link"}>X</Button>
           </div>
         </div>
-        <div className="w-3/10 space-y-4">
+        <div className="md:w-3/10 w-full space-y-4">
           <h1 className="font-semibold tracking-wider">Newsletter</h1>
           <p className="text-xs">
             Be The First To Know About New Exclusive Listings
